@@ -9,6 +9,7 @@ public class CodeLock : MonoBehaviour
     public GameObject lockObject; // the object that will be unlocked when the correct code is entered
     public Text codeInputField; // the input field where the player enters the code
     public Text feedbackText; // a text field to display feedback to the player
+    public Text interactText;
 
     private bool isLocked = true; // flag to keep track of whether the lock is currently locked or unlocked
     private bool canInteract = false; // flag to keep track of whether the player is close enough to interact with the lock
@@ -56,17 +57,23 @@ public class CodeLock : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (isLocked)
-        {
-            feedbackText.text = "Please enter the correct code to unlock the lock.";
-        }
         if (other.gameObject.CompareTag("Player"))
         {
           canInteract = true;
+          interactText.enabled = true;
+          feedbackText.enabled = true;
+          interactText.text = "Press E to interact";
         }
-        else
-        {
-          canInteract = false;
-        }
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+      if (other.gameObject.CompareTag("Player"))
+      {
+        canInteract = false;
+        interactText.enabled = false;
+        feedbackText.enabled = false;
+      }
     }
 }
