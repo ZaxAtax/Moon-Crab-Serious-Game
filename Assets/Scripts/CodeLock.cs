@@ -7,13 +7,22 @@ public class CodeLock : MonoBehaviour
 {
     public string code; // the correct code to unlock the lock
     public GameObject lockObject; // the object that will be unlocked when the correct code is entered
-    public Text codeInputField; // the input field where the player enters the code
+    public InputField codeInputField; // the input field where the player enters the code
     public Text feedbackText; // a text field to display feedback to the player
     public Text interactText;
 
     private bool isLocked = true; // flag to keep track of whether the lock is currently locked or unlocked
     private bool canInteract = false; // flag to keep track of whether the player is close enough to interact with the lock
     private bool isInputtingCode = false; // flag to keep track of whether the player is currently inputting a code
+
+
+    void Start()
+    {
+      codeInputField.interactable = false;
+      codeInputField.gameObject.SetActive(false);
+      feedbackText.enabled = false;
+      interactText.enabled = false;
+    }
 
     void Update()
     {
@@ -22,31 +31,47 @@ public class CodeLock : MonoBehaviour
             if (isLocked)
             {
                 feedbackText.text = "Please enter the correct code to unlock the lock.";
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 codeInputField.gameObject.SetActive(true);
+                codeInputField.interactable = true;
                 isInputtingCode = true;
             }
         }
 
         if (isInputtingCode && Input.GetKeyDown(KeyCode.Escape))
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            codeInputField.interactable = false;
             codeInputField.gameObject.SetActive(false);
             isInputtingCode = false;
         }
 
         if (isInputtingCode && Input.GetKeyDown(KeyCode.Return))
         {
-            CheckCode();
+            StartCoroutine(CheckCode());
         }
     }
 
-    public void CheckCode()
+    public IEnumerator CheckCode()
     {
         string inputCode = codeInputField.text;
 
         if (inputCode == code)
         {
+            codeInputField.interactable = false;
+            codeInputField.gameObject.SetActive(false);
+            isInputtingCode = false;
             isLocked = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             feedbackText.text = "Code correct! The lock is now unlocked.";
+            
+            yield return new WaitForSeconds(1f);
+
+            feedbackText.enabled = false;
+            interactText.enabled = false;
             lockObject.SetActive(false); // unlock the object by deactivating its GameObject
         }
         else
