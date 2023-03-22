@@ -18,8 +18,8 @@ public class CodeLock : MonoBehaviour
 
     void Start()
     {
-      codeInputField.interactable = false;
       codeInputField.gameObject.SetActive(false);
+      codeInputField.interactable = false;
       feedbackText.enabled = false;
       interactText.enabled = false;
     }
@@ -32,8 +32,8 @@ public class CodeLock : MonoBehaviour
             {
                 feedbackText.text = "Please enter the correct code to unlock the lock.";
                 Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
                 codeInputField.gameObject.SetActive(true);
+                Cursor.visible = true;
                 codeInputField.interactable = true;
                 isInputtingCode = true;
             }
@@ -44,8 +44,8 @@ public class CodeLock : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             codeInputField.interactable = false;
-            codeInputField.gameObject.SetActive(false);
             isInputtingCode = false;
+            codeInputField.gameObject.SetActive(false);
         }
 
         if (isInputtingCode && Input.GetKeyDown(KeyCode.Return))
@@ -61,11 +61,11 @@ public class CodeLock : MonoBehaviour
         if (inputCode == code)
         {
             codeInputField.interactable = false;
-            codeInputField.gameObject.SetActive(false);
             isInputtingCode = false;
             isLocked = false;
-            Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            codeInputField.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
             feedbackText.text = "Code correct! The lock is now unlocked.";
             
             yield return new WaitForSeconds(1f);
@@ -99,6 +99,7 @@ public class CodeLock : MonoBehaviour
         canInteract = false;
         interactText.enabled = false;
         feedbackText.enabled = false;
+        codeInputField.gameObject.SetActive(false);
       }
     }
 }

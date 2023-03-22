@@ -5,9 +5,10 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance { get; private set; } // static instance of the inventory
-
     public List<string> keys = new List<string>(); // list of key names the player has collected
     public Text inventoryText; // UI Text component to display inventory
+
+    private bool isOn = false;
 
     private void Awake()
     {
@@ -19,6 +20,19 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+
+    void Update()
+    {
+      if (Input.GetKeyDown(KeyCode.Tab) && isOn)
+      {
+        inventoryText.enabled = false;
+      }
+      else if (Input.GetKeyDown(KeyCode.tab) && !isOn)
+      {
+        inventoryText.enabled = true;
+      }
     }
 
     // Add a key to the inventory
