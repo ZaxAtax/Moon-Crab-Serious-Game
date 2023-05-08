@@ -8,11 +8,6 @@ public class TreeDetectionController : MonoBehaviour
     public ARTrackedImageManager trackedImageManager;
     public SeedManager seedManager; // Reference to SeedManager script
 
-    void Start()
-    {
-     
-    }
-
     void OnEnable()
     {
         trackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
@@ -31,7 +26,11 @@ public class TreeDetectionController : MonoBehaviour
             if (trackedImage.referenceImage.name == "oak tree")
             {
                 // Call the CollectSeed() method on the SeedManager script
-                seedManager.CollectSeed();
+                seedManager.CollectSeed("oak");
+            }
+            else if (trackedImage.referenceImage.name == "pine tree")
+            {
+                seedManager.CollectSeed("pine");
             }
         }
     }

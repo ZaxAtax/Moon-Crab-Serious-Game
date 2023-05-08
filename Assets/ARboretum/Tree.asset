@@ -27,3 +27,13 @@ MonoBehaviour:
     m_SpecifySize: 0
     m_Name: oak tree
     m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4907403833595658256
+      m_GuidHigh: 6539649124247798147
+    m_SerializedTextureGuid:
+      m_GuidLow: 2023300500683369618
+      m_GuidHigh: 17983109507064116635
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: pine tree
+    m_Texture: {fileID: 0}

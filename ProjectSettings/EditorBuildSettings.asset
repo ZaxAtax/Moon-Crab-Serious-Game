@@ -138,6 +138,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ARKit/CameraExposure/CameraExposure.unity
     guid: 1e974247d62884f67a7300f149cb7b71
   - enabled: 1
+    path: Assets/ARboretum/Scenes/Menu.unity
+    guid: f0b1adf5a8c9c0743bf7c2ff4d9636b0
+  - enabled: 1
     path: Assets/ARboretum/Scenes/Arboretum.unity
     guid: d2353f8eb6a7594499eff251c1cc487a
   m_configObjects:
